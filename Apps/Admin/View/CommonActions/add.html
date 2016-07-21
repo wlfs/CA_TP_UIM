@@ -1,0 +1,47 @@
+<extend name="Public/_model" />
+<block name="body"> 
+	<form id="form-admin-add" >
+		<ul class="forminfo">
+			<li>
+				<label>权限名称：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="权限名称" id="roleName" name="name" minlength="2" required/>
+			</li>
+			<li>
+				<label>权限编码：</label>
+				<input type="text" class="dfinput" placeholder="权限编码" id="roleName" name="code"/>
+			</li>
+			<li>
+				<label>分组：</label>
+				<div class="vocation">
+					<select class="select1" name="pid" size="1">
+						<option value="0">顶级分组</option>
+						<volist name='lis' id='item'>
+							<option value="{$item.id}">&nbsp;&nbsp;{$item.title_show}</option>
+						</volist>
+					</select>
+				</div>
+			</li>
+			<li>
+				<label>是否分组：</label>
+				<cite>
+					<label><input name="is_group" type="radio" value="1" class="ace" checked="">是</label>
+					<label><input name="is_group" type="radio" value="0" class="ace">否</label>
+				</cite>
+			</li>
+			<li>
+				<label>备注：</label>
+				<textarea name="remark" cols="" rows="" class="textinput" placeholder="备注"></textarea>
+			</li>
+			<li><label>&nbsp;</label><input type="submit" class="btn" value="确认保存"></li>
+		</form>
+	</block>
+	<block name='js'>
+		<script type="text/javascript">
+			$(function () {
+				ajaxForm('#form-admin-add');
+				$(".select1").uedSelect({
+					width : 345			  
+				});
+			});
+		</script>
+	</block>

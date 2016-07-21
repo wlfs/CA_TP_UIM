@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/select.css" />
+
+
+	
+	<style type="text/css">
+	.search-area{
+		float: right;
+		line-height: 35px;
+	}
+	</style>
+	<block name="css">
+
+	</block>
+	<script type="text/javascript" src="__PUBLIC__/Admin/plugins/jquery.min.js"></script>
+</head>
+<body>
+	<div class="place">
+		<span>位置：</span>
+		<ul class="placeul">
+			<li><a href="#">首页</a></li>
+			<block name="breadcrumb"></block>
+		</ul>
+	</div>
+	<div class="rightinfo">
+		<block name="body"></block>
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/Admin/plugins/layer/layer.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/select-ui.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/plugins/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/index.js"></script>
+	<block name="js"></block>
+</body>
+</html>

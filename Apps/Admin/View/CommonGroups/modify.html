@@ -1,0 +1,24 @@
+<extend name="Public/_model" />
+<block name="body"> 
+	<form id="form-add" >
+		<ul class="forminfo">
+			<input type="hidden" name="id" value="{$info.id}">
+			<li>
+				<label>角色名称：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="角色名称" value="{$info.name}" minlength="2"  name="name" required/>
+			</li>
+			<li>
+				<label>备注：</label>
+				<textarea name="intro" cols="" rows="" class="textinput">{$info.intro}</textarea>
+			</li>
+			<li><label>&nbsp;</label><input  type="submit" class="btn" value="确认保存"></li>
+		</ul>
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript">
+		$(function () {
+			ajaxForm('#form-admin-role-add');
+		});
+	</script>
+</block>

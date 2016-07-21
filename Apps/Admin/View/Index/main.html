@@ -1,0 +1,17 @@
+<extend name="Public/base" />
+<block name="body">
+	<div class="welinfo">
+		<span><img src="__PUBLIC__/Admin/images/sun.png" alt="天气"></span>
+		<b>Admin早上好，欢迎使用信息管理系统</b>(admin@uimaker.com)
+		<a href="#">帐号设置</a>
+	</div>
+	<div class="welinfo">
+		<span><img src="__PUBLIC__/Admin/images/time.png" alt="时间"></span>
+		<?php $ss= session('AdminInfo.last_login_time');?>
+		<i>您上次登录的时间：{$ss|date='Y-m-d H:i:s',###}</i> （不是您登录的？<a href="#">请点这里</a>）
+	</div>
+	<div class="xline"></div>
+</block>
+<block name='js'>
+	
+</block>

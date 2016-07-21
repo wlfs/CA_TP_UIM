@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/select.css" />
+	<script type="text/javascript" src="__PUBLIC__/Admin/plugins/jquery.min.js"></script>
+	<style type="text/css">
+		body {
+			min-width: 700px;
+		}
+	</style>
+	<block name="css">
+	</block>
+</head>
+<body>
+	<div class="mainindex">
+		<block name="body"></block>
+	</div>
+	<script src="__PUBLIC__/Admin/js/select-ui.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/plugins/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+		var ajaxForm=function(slt,fuc){
+			if(fuc==undefined||fuc==null){
+				fuc=parent.layer_close;
+			}
+			$(slt).validate({
+				errorElement: 'i',
+				errorClass: 'help-block',
+				focusInvalid: false,
+				ignore: "",
+				highlight: function (e) {
+					$(e).closest('li').removeClass('has-info').addClass('has-error');
+				},
+				success: function (e) {
+					$(e).closest('li').removeClass('has-error');
+					$(e).remove();
+				},
+				errorPlacement: function (error, element) {
+					element.closest('li').find('i').remove();
+					error.appendTo(element.closest('li'));
+				},
+				submitHandler: function (form) {
+					$.post('{:U()}', $(slt).serialize(), function(d) {
+						if(d.status==1){
+							parent.alert_success(d.info,fuc);
+						}else{
+							parent.alert_error(d.info,fuc);
+						}
+					});
+					return false;
+				}
+			});
+			
+		}
+	</script>
+	<block name="js"></block>
+</body>
+</html>

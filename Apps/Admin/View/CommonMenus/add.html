@@ -1,0 +1,63 @@
+<extend name="Public/_model" />
+<block name="body">
+	<form id="form-add" >
+	
+		<ul class="forminfo">
+			<li>
+				<label>菜单名称：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="菜单名称" minlength="2"  name="name" required/>
+			</li>
+			<li>
+				<label>权重：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="菜单排序权重（值大在前）" name="weight" required range="[1,999]"/>
+			</li>
+			<li>
+				<label>父级菜单：<b>*</b></label>
+				<div class="vocation">
+					<select class="select1" id="sltPid" name="pid">
+						<option value="0">顶级菜单</option>
+						<volist name='lis' id='item'>
+							<option value="{$item.id}">&nbsp;&nbsp;{$item.name}</option>
+						</volist>
+					</select>
+				</div>
+			</li>
+			<li class="slt_pid_1">
+				<label>菜单权限：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="菜单权限" name="action" />
+			</li>
+			<li class="slt_pid_1">
+				<label>菜单连接：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="菜单连接" name="url" />
+			</li>
+			<li class="slt_pid_0">
+				<label>图标Name：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="图标Name" name="icon_class" />
+			</li>
+			<li class="slt_pid_0">
+				<label>注意：</label>
+				<i>图标Name是在__PUBLIC__/Admin/menuico/文件夹下面的png图片名称</i>
+			</li>
+			<li><label>&nbsp;</label><input  type="submit" class="btn" value="确认保存"></li>
+		</ul>
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript">
+		$(function () {
+			ajaxForm('#form-add');
+			$(".select1").uedSelect({
+				width : 345			  
+			});
+			$('#sltPid').change(function(event) {
+				var v=$(this).val();
+				$('.slt_pid_0,.slt_pid_1').hide();
+				if(v==0){
+					$('.slt_pid_0').show();
+				}else{
+					$('.slt_pid_1').show();
+				}
+			}).change();
+		});
+	</script>
+</block>

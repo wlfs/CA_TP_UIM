@@ -1,0 +1,58 @@
+<extend name="Public/base" />
+<block name='breadcrumb'>
+	<li><a href="#">管理员管理</a></li>
+	<li class="active">用户组管理</li>
+</block>
+<block name="body"> 
+
+	<div class="tools">
+		<ul class="toolbar">
+			<li class="click" onclick="layer_show('添加用户组','{:U("add")}','800','550')"><span><img src="__PUBLIC__/Admin/images/t01.png"></span>添加</li>
+			<li onclick="data_dels()"><span><img src="__PUBLIC__/Admin/images/t03.png"></span>批量删除</li>
+		</ul>
+		<div class="search-area"> 
+			<span class="pull-right">共有数据：<strong>{$lis|count}</strong> 条</span>
+		</div>
+	</div>
+	
+
+	<table class="tablelist">
+		<thead>
+			<tr  >
+				<th width="35">
+					<input type="checkbox" class="ace">
+				</th>
+				<th  style="width: 80px;">ID</th>
+				<th  style="width: 80px;">用户组</th>
+				<th  style="width: 120px;">是否系统用户组</th>
+				<th>描述</th> 
+				<th  width="130">操作</th>
+			</tr>
+		</thead>
+		<tbody> 
+			<volist name='lis' id='item'> 
+				<tr > 
+					<td>
+						<input type="checkbox" value="{$item.id}" class="ace" />
+					</td>
+					<td>{$item.id}</td>
+					<td>{$item.name}</td>
+					<td>
+						<eq name='item.is_sys' value='1'>
+							是
+							<else/>
+							否
+						</eq>
+					</td>
+					<td>{$item.intro}</td>
+					<td >
+						<i class="tablelink" onclick="layer_show('权限管理','{:U('auth?id='.$item['id'])}')" >权限管理</i>
+						<i class="tablelink" onclick="layer_show('编辑','{:U('modify?id='.$item['id'])}','800','350')" >编辑</i>
+						<i class="tablelink" onclick="self_del('{$item.id}')" >删除</i>
+					</td>
+
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+</block>

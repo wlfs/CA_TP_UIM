@@ -1,0 +1,13 @@
+﻿<extend name="Public/base" />
+<block name='breadcrumb'>
+	<!-- <li><a href="#">首页</a></li>
+	<li class="active">菜单管理</li> -->
+</block>
+<block name="body">
+	<p class="f-20 text-success">欢迎使用通用后台管理 Thinkphp+ACE1.4 php版<span class="f-14">v1.0</span></p>
+	<?php $ss= session('AdminInfo.last_login_time');
+
+	?>
+	<p>上次登录IP：{:session('AdminInfo.last_login_ip')}  上次登录时间：{$ss|date='Y-m-d H:i:s',###}</p>
+
+</block>

@@ -1,0 +1,74 @@
+<extend name="Public/base" />
+<block name='breadcrumb'>
+	<li><a href="#">日志管理</a></li>
+	<li class="active">登录记录</li>
+</block>
+<block name="body"> 
+	<div class="tools">
+		<ul class="toolbar">
+			<li onclick="data_dels()"><span><img src="__PUBLIC__/Admin/images/t03.png"></span>批量删除</li>
+		</ul>
+		<div class="search-area"> 
+			<form>
+				<ul class="seachform ">
+					<literal>
+						<li>
+							<label>日期范围：</label>
+							<input type="text" name="sdate" onfocus="WdatePicker({skin:'twoer',maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="scinput" placeholder="开始日期" style="width:120px;">
+						</li>
+						<li>
+							<label>-</label>  
+							<input type="text" name="edate" onfocus="WdatePicker({skin:'twoer',minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="scinput" placeholder="结束日期" style="width:120px;">
+						</li>
+					</literal>
+					<li>
+						<label>关键词</label>
+						<input name="kw" placeholder="输入管理员名称、电话" value="{:I('kw')}" type="text" class="scinput">
+					</li>
+					<li>
+						<label>&nbsp;</label>
+						<input type="submit" class="scbtn" value="查询">
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+
+	<table class="tablelist">
+		<thead>
+			<tr>
+				<th width="35">
+					<input type="checkbox" class="ace">
+				</th>
+				<th width="150" >管理员名称</th>
+				<th width="150" >登录时间</th>
+				<th width="150" >登录IP</th>
+				<th >登录地址</th> 
+				<th width="50">操作</th>
+			</tr>
+		</thead>
+		<tbody> 
+			<volist name='pageInfo:data' id='item'> 
+				<tr > 
+					<td>
+						<input type="checkbox" value="{$item.id}" class="ace" />
+					</td>
+					<td>{$item.name}</td>
+					<td>{$item.created|date='Y-m-d H:i:s',###}</td>
+					<td>{$item.ip}</td>  
+					<td>{$item.ip_address|default='无'}</td>
+					<td >
+						<a class="tablelink" onclick="self_del('{$item.id}')">删除</a>
+					</td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+	{$pageInfo:html}
+</block>
+<block name='js'>
+	<script type="text/javascript">
+		$('#datemax').val('{:I("edate")}');
+		$('#datemin').val('{:I("sdate")}');
+	</script>
+</block>

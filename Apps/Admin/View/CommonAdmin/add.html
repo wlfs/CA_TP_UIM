@@ -1,0 +1,56 @@
+<extend name="Public/_model" />
+<block name="body">
+	<form id="form-add" >
+		<ul class="forminfo">
+			<li>
+				<label>账号：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="登录的账号" minlength="6"  name="login_name" required/>
+			</li>
+			<li>
+				<label>姓名：<b>*</b></label>
+				<input type="text" class="dfinput" placeholder="输入名称（昵称）"  minlength="2" name="name" required/>
+			</li>
+			<li>
+				<label>初始密码：<b>*</b></label>
+				<input type="password" class="dfinput" placeholder="初始密码" minlength="6" id="password"  name="password" required/>
+			</li>
+			<li>
+				<label>确认密码：<b>*</b></label>
+				<input type="password" class="dfinput" placeholder="确认新密码" minlength="6" equalTo='#password'  name="password2" required/>
+			</li>
+			<li>
+				<label>手机：</label>
+				<input type="text" class="dfinput" placeholder="手机号码"  name="mobile"/>
+			</li>
+			<li>
+				<label>邮箱：</label>
+				<input type="text" class="dfinput" placeholder="邮箱" name="email"/>
+			</li>
+			<li>
+				<label>用户组：</label>
+				<cite>
+					<volist name='groups' id='group'>
+						<label>
+							<input
+							<eq name='group.checked' value='1'>checked="checked"</eq> 
+							name="group_ids[]" value="{$group.id}" type="checkbox" class="ace"/>
+							{$group.name}
+						</label>
+					</volist>
+				</cite>
+			</li>
+			<li>
+				<label>备注：</label>
+				<textarea name="memo" cols="" rows="" class="textinput"></textarea>
+			</li>
+			<li><label>&nbsp;</label><input  type="submit" class="btn" value="确认保存"></li>
+		</ul>
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript">
+		$(function () {
+			ajaxForm('#form-add');
+		});
+	</script>
+</block>

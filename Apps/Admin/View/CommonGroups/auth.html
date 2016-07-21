@@ -1,0 +1,107 @@
+<extend name="Public/_model" />
+<block name="body">
+	<style type="text/css">
+		.tree_2{
+			margin-bottom: 0px;
+		}
+		.tree_2 dt{
+			width: 120px;
+			float: left;
+			text-align: right;
+			line-height: 30px;
+		}
+		.tree_2 dd{
+			margin-left: 120px;
+			line-height: 30px;
+		}
+		
+		fieldset{
+			border: 1px solid #E5E5E5;
+			padding: 0.35em 0.625em 0.75em;
+		}
+	</style>
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<input type="hidden" name="id" value="{$info.id}">
+		<volist name='tree' id='m1'>
+			<fieldset>
+				<legend>
+					<label>
+						<if condition="$m1['group_id'] gt 0">
+							<input type="checkbox" checked="checked" class="ace" value="{$m1.id}" name="ids[]" >
+							<else/>
+							<input type="checkbox" value="{$m1.id}" class="ace" name="ids[]" >
+						</if>
+						{$m1.name}
+					</label>
+				</legend>
+				<volist name='m1._child' id='m2'>
+					<dl class="tree_2">
+						<dt>
+							<label>
+								{$m2.name}&nbsp;&nbsp;					
+								<if condition="$m2['group_id'] gt 0">
+									<input type="checkbox" checked="checked" class="ace" value="{$m2.id}" name="ids[]" >
+									<else/>
+									<input type="checkbox" value="{$m2.id}" class="ace" name="ids[]" >
+								</if>
+							</label>：
+						</dt>
+						<dd>
+							<volist name='m2._child' id='m3'>
+								<label class="">
+									<if condition="$m3['group_id'] gt 0">
+										<input type="checkbox" checked="checked" class="ace"  value="{$m3.id}" name="ids[]" >
+										<else/>
+										<input type="checkbox" value="{$m3.id}" class="ace"  name="ids[]" >
+									</if>
+									{$m3.name}
+								</label>
+							</volist>
+						</dd>
+					</dl>
+				</volist>
+			</fieldset>
+		</volist>
+		<div>&nbsp;</div>
+		<input type="submit" class="btn" value="保存权限">
+	</form>
+</block>
+<block name='js'>
+	<script type="text/javascript">
+		$(function () {
+			ajaxForm('#form-admin-role-add');
+			$("#form-admin-role-add legend input:checkbox").click(function(){
+				$(this).closest("fieldset").find("dl input:checkbox").prop("checked",$(this).prop("checked"));
+			});
+			$("#form-admin-role-add dd input:checkbox").click(function(){
+				if(!$(this).prop("checked")){
+					var l=$(this).parents("dd").find("input:checked").length;
+					if(l==0){
+						$(this).parents("dl").find("input:checkbox").prop("checked",false);
+					}
+				}else{
+					var l=$(this).parents("dd").find("input:checked").length;
+					var l2=$(this).parents("dd").find("input").length;
+					if(l==l2){
+						$(this).parents("dl").find("input:checkbox").prop("checked",true);
+					}
+				}
+			});
+			$("#form-admin-role-add dt input:checkbox").click(function(){
+				$(this).parents(".tree_2").find("dd input:checkbox").prop("checked",$(this).prop("checked"));
+				if(!$(this).prop("checked")){
+					var l =$(this).parents("fieldset").find("dt input:checked").length;
+					if(l==0){
+						$(this).parents("fieldset").find("legend input:checkbox").prop("checked",false);
+					}
+				}else{
+					var l =$(this).parents("fieldset").find("dt input:checked").length;
+					var l2=$(this).parents("fieldset").find("dt input").length;
+					if(l==l2){
+						$(this).parents("fieldset").find("legend input:checkbox").prop("checked",true);
+					}
+				}
+			});
+		});
+	</script>
+</block>
